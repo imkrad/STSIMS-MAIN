@@ -19,7 +19,7 @@ class MenuController extends Controller
 
     public function index(){
         $overall = []; $menus = []; $listahan = [];
-        $lists = ListMenu::where('is_mother',1)->where('group','Menu')->get();
+        $lists = ListMenu::where('is_mother',1)->where('group','Menu')->orderBy('order','ASC')->get();
         foreach($lists as $list){
             
             $submenus = [];

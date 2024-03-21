@@ -2,11 +2,14 @@
 
 namespace App\Services;
 
-use App\Models\LocationRegion;
-use App\Models\LocationProvince;
-use App\Models\LocationMunicipality;
-use App\Models\LocationBarangay;
-use App\Models\ListDropdown;
+use App\Models\{
+    LocationRegion,
+    LocationProvince,
+    LocationMunicipality,
+    LocationBarangay,
+    ListDropdown,
+    ListProgram,
+};
 
 class DropdownService
 {
@@ -79,4 +82,28 @@ class DropdownService
         });
         return $data;
     }
+
+    public function levels(){
+        $data = ListDropdown::where('classification','Level')->get()->map(function ($item) {
+            return [
+                'value' => $item->id,
+                'name' => $item->name,
+                'others' => $item->others
+            ];
+        });
+        return $data;
+    }
+
+    public function programs(){
+        $data = ListProgram::all()->map(function ($item) {
+            return [
+                'value' => $item->id,
+                'name' => $item->name,
+                'is_sub' => $item->is_sub
+            ];
+        });
+        return $data;
+    }
+
+    
 }
