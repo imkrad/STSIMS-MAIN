@@ -25,6 +25,9 @@ class SchoolController extends Controller
             case 'campuses':
                 return $this->school->campuses($request);
             break;
+            case 'dropdowns':
+                return $this->dropdown->schools($request);
+            break;
             default :
             return inertia('Modules/Directory/Schools/Index',[
                 'regions' => $this->dropdown->regions(),

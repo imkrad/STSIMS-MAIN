@@ -97,6 +97,7 @@ export default {
                 school_id: null,
                 course_id: null,
                 program_id: null,
+                level_id: null,
                 subprogram_id: null,
                 region_code: null,
                 province_code: null,
@@ -113,10 +114,10 @@ export default {
     },
     computed: {
         programs : function() {
-            return this.dropdowns.programs.filter(x => x.is_sub === 1);
+            return this.dropdowns.programs.filter(x => x.is_sub === 0);
         },
         subprograms : function() {
-            return this.dropdowns.programs.filter(x => x.is_sub === 0);
+            return this.dropdowns.programs.filter(x => x.is_sub === 1);
         },
         levels : function() {
             return this.dropdowns.levels;

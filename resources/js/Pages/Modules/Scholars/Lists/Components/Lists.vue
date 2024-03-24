@@ -3,7 +3,11 @@
         <b-col lg>
             <div class="input-group mb-1">
                 <span class="input-group-text"> <i class="ri-search-line search-icon"></i></span>
-                <input type="text" v-model="filter.keyword" placeholder="Search Scholar" class="form-control" style="width: 35%;">
+                <input type="text" v-model="filter.keyword" placeholder="Search Scholar" class="form-control" style="width: 60%;">
+                <select v-model="filter.status" @change="fetch()" class="form-select">
+                    <option :value="null" selected>Select Status</option>
+                    <option :value="list" v-for="list in statuses" v-bind:key="list.value">{{list.name}}</option>
+                </select>
                 <span @click="openUpload()" class="input-group-text" v-b-tooltip.hover title="Upload Scholars" style="cursor: pointer;"> 
                     <i class="ri-upload-cloud-fill search-icon"></i>
                 </span>
@@ -21,12 +25,13 @@
             <thead class="table-light">
                 <tr class="fs-11">
                    <th></th>
-                    <th style="width: 30%;">Name</th>
-                    <th style="width: 15%;" class="text-center">Program</th>
-                    <th style="width: 15%;" class="text-center">Awarded Year</th>
-                    <th style="width: 15%;" class="text-center">School</th>
-                    <th style="width: 15%;" class="text-center">Status</th>
-                    <th style="width: 10%;"></th>
+                    <th style="width: 22%;">Name</th>
+                    <th style="width: 10%;" class="text-center">Program</th>
+                    <th style="width: 10%;" class="text-center">Awarded Year</th>
+                    <th style="width: 20%;" class="text-center">School</th>
+                    <th style="width: 20%;" class="text-center">Course</th>
+                    <th style="width: 10%;" class="text-center">Status</th>
+                    <th style="width: 5%;"></th>
                 </tr>
             </thead>
             <tbody>
@@ -45,7 +50,9 @@
                     <td class="text-center fs-12">{{list.awarded_year}}</td>
                     <td class="text-center">
                         <p class="fs-12 mb-n1 text-dark">{{(list.education.school instanceof Object) ? list.education.school.name : list.education.school}}</p>
-                        <p class="fs-12 text-muted mb-0">{{(list.education.course instanceof Object) ? list.education.course.shortcut : list.education.course}}</p>
+                    </td>
+                    <td class="text-center">
+                        <p class="fs-12 mb-0">{{(list.education.course instanceof Object) ? list.education.course.shortcut : list.education.course}}</p>
                     </td>
                     <td class="text-center">
                         <span :class="'badge '+list.status.color+' '+list.status.others">{{list.status.name}}</span>
@@ -82,7 +89,8 @@ export default {
             links: {},
             index: null,
             filter: {
-                keyword: null
+                keyword: null,
+                status: null
             }
         }
     },
@@ -102,6 +110,11 @@ export default {
             }
         }
     },
+    computed: {
+        statuses : function() {
+            return this.dropdowns.statuses.filter(x => x.type === 'Progress' || x.type === 'Ongoing');
+        }
+    },
     methods: {
         checkSearchStr: _.debounce(function(string) {
             this.fetch();
@@ -111,6 +124,7 @@ export default {
             axios.get(page_url,{
                 params : {
                     keyword: this.filter.keyword,
+                    status: this.filter.status,
                     subfilters: this.subfilters,
                     count: ((window.innerHeight-350)/59),
                     option: 'lists'

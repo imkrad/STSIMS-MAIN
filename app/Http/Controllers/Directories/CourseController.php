@@ -7,13 +7,16 @@ use Illuminate\Http\Request;
 use App\Services\Directory\CourseService;
 use App\Traits\HandlesTransaction;
 use App\Http\Requests\CourseRequest;
+use App\Services\DropdownService;
 
 class CourseController extends Controller
 {
     use HandlesTransaction;
 
-    public function __construct(CourseService $course){
+    public function __construct(CourseService $course, DropdownService $dropdown){
         $this->course = $course;
+        $this->dropdown = $dropdown;
+        
     }
 
     public function index(Request $request){
@@ -22,7 +25,7 @@ class CourseController extends Controller
                 return $this->course->lists($request);
             break;
             case 'dropdowns':
-                return $this->course->list_courses($request);
+                return $this->dropdown->courses($request);
             break;
             default :
             return inertia('Modules/Directory/Courses/Index');

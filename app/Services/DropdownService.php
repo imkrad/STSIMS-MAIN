@@ -9,6 +9,9 @@ use App\Models\{
     LocationBarangay,
     ListDropdown,
     ListProgram,
+    ListCourse,
+    ListStatus,
+    SchoolCampus,
 };
 
 class DropdownService
@@ -105,5 +108,56 @@ class DropdownService
         return $data;
     }
 
-    
+    public function statuses(){
+        $data = ListStatus::all()->map(function ($item) {
+            return [
+                'value' => $item->id,
+                'name' => $item->name,
+                'type' => $item->type,
+                'color' => $item->color,
+                'others' => $item->others,
+                'is_active' => $item->is_active,
+            ];
+        });
+        return $data;
+    }
+
+    public function schools($request){
+        $keyword = $request->keyword;
+        if(!empty($keyword)){
+            $data = SchoolCampus::with('school','term')
+            ->whereHas('school',function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', '%'.$keyword.'%');
+            })
+            ->orWhere(function ($query) use ($keyword) {
+                $query->where('campus',$keyword);
+            })->get()->map(function ($item) {
+                $campus = ($item->is_alone) ? '' : '-'.$item->campus;
+                $name = $item->school->name.$campus;
+                return [
+                    'value' => $item->id,
+                    'name' => $name
+                ];
+            });
+        }else{
+            $data = [];
+        }
+        return $data;
+    }
+
+    public function courses($request){
+        $keyword = $request->keyword;
+        if(!empty($keyword)){
+            $data = ListCourse::where('name', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('shortcut', 'LIKE', '%'.$keyword.'%')->get()->map(function ($item) {
+                return [
+                    'value' => $item->id,
+                    'name' => ($item->name) ? $item->name : $item->shortcut
+                ];
+            });
+        }else{
+            $data = [];
+        }
+        return $data;
+    }
 }

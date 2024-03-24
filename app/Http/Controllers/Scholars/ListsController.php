@@ -30,6 +30,7 @@ class ListsController extends Controller
                     'programs' => $this->dropdown->programs(),
                     'regions' =>  $this->dropdown->regions(),
                     'levels' =>  $this->dropdown->levels(),
+                    'statuses' => $this->dropdown->statuses()
                 ]
             ]);
         }
