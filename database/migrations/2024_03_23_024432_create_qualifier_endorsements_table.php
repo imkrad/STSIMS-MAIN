@@ -16,7 +16,6 @@ return new class extends Migration
             $table->increments('id');
             $table->boolean('is_approved')->default(0);
             $table->boolean('is_seened')->default(0);
-            $table->json('information');
             $table->string('endorsed_to');
             $table->foreign('endorsed_to')->references('code')->on('location_regions')->onDelete('cascade');
             $table->string('endorsed_by');
