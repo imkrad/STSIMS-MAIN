@@ -48,10 +48,11 @@ class DatabaseSeeder extends Seeder
         // $this->call(SchoolCampusesTableSeeder::class);
         // $this->call(SchoolNamesTableSeeder::class);
         // $this->call(SchoolCoursesTableSeeder::class);
-        $this->call(QualifiersTableSeeder::class);
-        $this->call(QualifierAddressesTableSeeder::class);
-        $this->call(QualifierProfilesTableSeeder::class);
-        $this->call(QualifierDefermentsTableSeeder::class);
-        $this->call(QualifierNotavailsTableSeeder::class);
+        // $this->call(QualifiersTableSeeder::class);
+        // $this->call(QualifierAddressesTableSeeder::class);
+        // $this->call(QualifierProfilesTableSeeder::class);
+        // $this->call(QualifierDefermentsTableSeeder::class);
+        // $this->call(QualifierNotavailsTableSeeder::class);
+        $this->call(ListMenusTableSeeder::class);
     }
 }
