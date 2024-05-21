@@ -19,11 +19,17 @@ class UserProfile extends Model
         'gender',
         'mobile',
         'user_id',
+        'agency_id'
     ];
 
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'user_id', 'id');
+    }
+
+    public function agency()
+    {
+        return $this->belongsTo('App\Models\ListAgency', 'agency_id', 'id');
     }
 
     public function setFirstnameAttribute($value)

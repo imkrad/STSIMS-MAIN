@@ -47,6 +47,21 @@ class QualifierController extends Controller
             case 'upload':
                 return $this->save->upload($request);
             break;
+            case 'enroll':
+                return $this->update->enroll($request);
+            break;
+            case 'endorse':
+                return $this->update->endorse($request);
+            break;
+            case 'endorsed':
+                return $this->update->endorsed($request);
+            break;
+            case 'update':
+                return $this->update->update($request);
+            break;
+            case 'edit':
+                return $this->update->edit($request);
+            break;
         }
     }
 }

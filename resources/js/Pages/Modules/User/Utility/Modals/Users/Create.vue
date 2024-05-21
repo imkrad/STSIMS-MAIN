@@ -37,6 +37,11 @@
                                 <TextInput id="mobile" v-model="form.mobile" type="text" class="form-control" autofocus placeholder="Please enter mobile" autocomplete="mobile" required :class="{ 'is-invalid': form.errors.mobile }" @input="handleInput('mobile')" :light="true"/>
                                 <InputError :message="form.errors.mobile" />
                             </BCol>
+                            <BCol lg="12"><hr class="text-muted mt-n1 mb-n2"/></BCol>
+                            <BCol lg="12" class="mt-0 mb-1">
+                                <InputLabel for="agency_id" value="Agency" />
+                                <Multiselect :options="agencies" v-model="form.agency_id" :message="form.errors.agency_id" placeholder="Select Agency" ref="multiselect3"/>
+                            </BCol>
                             <BCol lg="12"><hr class="text-muted mt-n1 mb-n3"/></BCol>
                             <BCol lg="6"  style="margin-top: 13px; margin-bottom: -12px;">
                                <div class="row">
@@ -71,8 +76,10 @@ import { useForm } from '@inertiajs/vue3';
 import InputError from '@/Shared/Components/Forms/InputError.vue';
 import InputLabel from '@/Shared/Components/Forms/InputLabel.vue';
 import TextInput from '@/Shared/Components/Forms/TextInput.vue';
+import Multiselect from '@/Shared/Components/Forms/Multiselect.vue'
 export default {
-    components: { InputError, InputLabel, TextInput },
+    components: { InputError, InputLabel, TextInput, Multiselect },
+    props: ['agencies'],
     data(){
         return {
             currentUrl: window.location.origin,
@@ -84,7 +91,8 @@ export default {
                 email: null,
                 mobile: null,
                 gender: null,
-                profile_id: null
+                profile_id: null,
+                agency_id: null
             }),
             showModal: false,
             editable: false
@@ -127,6 +135,7 @@ export default {
             this.form.errors[field] = false;
         },
         hide(){
+            this.$refs.multiselect3.clear();
             this.form.reset();
             this.form.clearErrors();
             this.editable = false;

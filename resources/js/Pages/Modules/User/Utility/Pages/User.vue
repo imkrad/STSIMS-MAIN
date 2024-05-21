@@ -25,7 +25,7 @@
                                 <th></th>
                                 <th style="width: 30%;">Name</th>
                                 <th style="width: 15%;" class="text-center">Role</th>
-                                <th style="width: 15%;" class="text-center">Username</th>
+                                <th style="width: 15%;" class="text-center">Agency</th>
                                 <th style="width: 15%;" class="text-center">Mobile</th>
                                 <th style="width: 15%;" class="text-center">Status</th>
                                 <th style="width: 10%;"></th>
@@ -44,7 +44,7 @@
                                     <p class="fs-12 text-muted mb-0">{{list.email}}</p>
                                 </td>
                                 <td class="text-center">{{list.role}}</td>
-                                <td class="text-center">{{list.username}}</td>
+                                <td class="text-center">{{list.agency.acronym}}</td>
                                 <td class="text-center">{{list.mobile}}</td>
                                 <td class="text-center">
                                     <span v-if="list.is_active" class="badge bg-success">Active</span>
@@ -73,7 +73,7 @@
         </BCard>
     </form>
     <Api ref="api"/>
-    <Create ref="create"/>
+    <Create :agencies="agencies" ref="create"/>
     <Activation ref="activation"/>
 </div>
 </template>
@@ -92,6 +92,7 @@ export default {
         ])
     },
     components: { Create, Pagination, Activation, Api },
+    props: ['agencies'],
     data(){
         return {
             currentUrl: window.location.origin,

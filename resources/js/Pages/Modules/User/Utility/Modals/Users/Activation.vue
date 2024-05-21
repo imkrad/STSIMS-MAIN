@@ -42,6 +42,7 @@ export default {
                 id: null,
                 email: null,
                 is_active: null,
+                profile_id: null,
                 type: null
             }),
             user: {},
@@ -55,6 +56,7 @@ export default {
             this.type = type;
             this.form.type = type;
             this.form.id = this.user.id,
+            this.form.profile_id = this.user.profile_id;
             this.form.email = this.user.email,
             this.form.is_active = (this.user.is_active == 1) ? 0 : 1,
             this.showModal = true;

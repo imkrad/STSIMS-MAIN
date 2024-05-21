@@ -73,7 +73,7 @@ class UserController extends Controller
     protected function lists($request){
         $data = UserResource::collection(
             User::query()
-            ->with('profile')
+            ->with('profile.agency')
             ->when($request->keyword, function ($query, $keyword) {
                 $query->whereHas('profile',function ($query) use ($keyword) {
                     $query->where(\DB::raw('concat(firstname," ",lastname)'), 'LIKE', "%{$keyword}%")
@@ -82,7 +82,7 @@ class UserController extends Controller
                     $query->where('username', 'LIKE', "%{$keyword}%")->whereNotIn('role',['Scholar','Administrator']);
                 });
             })
-            // ->where('role','Staff')
+            ->where('role','Staff')
             ->paginate($request->count)
         );
         return $data;

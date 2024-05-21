@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
+
+use App\Models\ListAgency;
 use App\Models\configuration;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,7 +19,8 @@ class UtilityController extends Controller
             break;
             case 'users':
                 return inertia('Modules/User/Utility/Pages/User',[
-                    'configuration' =>  $this->configuration()
+                    'configuration' =>  $this->configuration(),
+                    'agencies' => $this->agencies()
                 ]);
             break;
             case 'roles':
@@ -56,6 +59,18 @@ class UtilityController extends Controller
 
     public function configuration(){
         $data = Configuration::where('id',1)->first();
+        return $data;
+    }
+
+    public function agencies(){
+        $data = ListAgency::where('is_active',1)->get()->map(function ($item) {
+            return [
+                'value' => $item->id,
+                'name' => $item->name,
+                'acronym' => $item->acronym,
+                'is_active' => ($item->is_active) ? true : false,
+            ];
+        });
         return $data;
     }
 }

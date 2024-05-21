@@ -48,6 +48,7 @@ export default {
             axios.get(this.currentUrl + '/utility/users',{
                 params : {
                     id: this.user.id,
+                    url: this.currentUrl,
                     option: 'token'
                 }
             })
