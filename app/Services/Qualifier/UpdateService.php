@@ -43,7 +43,7 @@ class UpdateService
                     'school_id' => $request->school_id,
                     'course_id' => $request->course_id,
                     'level_id' => ($scholar['is_undergrad'] == 1) ? 24 : 26,
-                    'information' => json_encode($info = []),
+                    // 'information' => json_encode($info = []),
                     'is_completed' => 1,
                     'is_enrolled' => 1,
                     'is_shiftee' => 0,
@@ -82,7 +82,7 @@ class UpdateService
                             'municipality_code' => $scholar['address']['municipality']['code'],
                             'barangay_code' => $scholar['address']['barangay']['code'],
                             'district' => $scholar['address']['district'],
-                            'information' => json_encode($information = []),
+                            // 'information' => json_encode($information = []),
                             'is_permanent' => 1,
                             'is_within' => 0,
                             'is_completed' => 1,
@@ -163,8 +163,8 @@ class UpdateService
     }
 
     public function update($request){
-        $data = QualifierAddress::where('id',$request->address_id)->update($request->except('id','address_id','editable','type'));
-        $q =QualifierAddress::find($request->address_id);
+        $data = QualifierAddress::where('id',$request->address_id)->update($request->except('id','address_id','editable','option'));
+        $q = QualifierAddress::find($request->address_id);
         $qualifier = Qualifier::
             with('address.region','address.province','address.municipality','address.barangay')
             ->with('profile','program','subprogram','status','type')
@@ -178,7 +178,7 @@ class UpdateService
         $bearer = $request->bearerToken();
         $token = PersonalAccessToken::findToken($bearer);
 
-        $data = Qualifier::where('id',$request->id)->update($request->except('id','reason','type'));
+        $data = Qualifier::where('id',$request->id)->update($request->except('id','reason','option'));
         if($request->status_id == 16){
             $postData = array(
                 'reason' => $request->reason,

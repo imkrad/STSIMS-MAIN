@@ -16,7 +16,13 @@ Route::prefix('01101011 01110010 01100001 01100100')->group(function(){
 
     Route::prefix('qualifiers')->group(function(){
         Route::get('/', [App\Http\Controllers\Api\QualifierController::class, 'fetchQualifiers']);
-        Route::post('/', [App\Http\Controllers\Scholar\QualifierController::class, 'storeQualifiers']);
         Route::get('/statistics', [App\Http\Controllers\Api\QualifierController::class, 'getStatistics']);
+        Route::post('/', [App\Http\Controllers\Scholars\QualifierController::class, 'store']);
+    });
+
+    Route::prefix('endorsements')->group(function(){
+        Route::get('/', [App\Http\Controllers\Api\EndorsementController::class, 'fetchEndorsements']);
+        Route::get('/statistics', [App\Http\Controllers\Api\EndorsementController::class, 'getStatistics']);
+        Route::post('/', [App\Http\Controllers\Scholar\EndorsementController::class, 'store']);
     });
 });
