@@ -199,9 +199,7 @@ export default {
             :offset="{ alignmentAxis: 55, crossAxis: 15, mainAxis: -50 }"
             toggle-class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle arrow-none"
             menu-class="dropdown-menu-end">
-            <template #button-content> <img id="header-lang-img" src="@assets/images/flags/us.svg" alt="Header Language"
-                height="20" class="rounded">
-            </template>
+          
             <BLink href="javascript:void(0);" class="dropdown-item notify-item language py-2"
               v-for="(entry, key) in languages" :data-lang="entry.language" :title="entry.title"
               @click="setLanguage(entry.language, entry.title, entry.flag)" :key="key">
