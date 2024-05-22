@@ -531,7 +531,7 @@ export default {
         <i class="mdi mdi-spin mdi-cog-outline fs-22"></i>
       </div>
     </div>
-    <BOffcanvas class="border-0" id="theme-settings-offcanvas" header-class="d-flex align-items-center bg-primary bg-gradient p-3" body-class="p-0" z-index="1005" footer-class="offcanvas-footer border-top p-3 text-center" placement="end" v-model="show">
+    <BOffcanvas class="border-0" id="theme-settings-offcanvas" header-class="d-flex align-items-center bg-primary bg-gradient p-3" body-class="p-0" z-index="1005" footer-class="offcanvas-footer border-top p-3 text-center" placement="end">
       <template #header>
         <div class="me-2">
           <h5 class="m-0 me-2 text-white">Theme Customizer</h5>
