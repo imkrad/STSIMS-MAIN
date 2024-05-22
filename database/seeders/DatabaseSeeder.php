@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         //     'created_at' => now(),
         //     'updated_at' => now(),
         // ]);
-
+        
         // $this->call(LocationRegionsTableSeeder::class);
         // $this->call(LocationProvincesTableSeeder::class);
         // $this->call(LocationMunicipalitiesTableSeeder::class);
@@ -48,11 +48,12 @@ class DatabaseSeeder extends Seeder
         // $this->call(SchoolCampusesTableSeeder::class);
         // $this->call(SchoolNamesTableSeeder::class);
         // $this->call(SchoolCoursesTableSeeder::class);
-        // $this->call(QualifiersTableSeeder::class);
-        // $this->call(QualifierAddressesTableSeeder::class);
-        // $this->call(QualifierProfilesTableSeeder::class);
-        // $this->call(QualifierDefermentsTableSeeder::class);
-        // $this->call(QualifierNotavailsTableSeeder::class);
-        $this->call(ListMenusTableSeeder::class);
+        // $this->call(ListMenusTableSeeder::class);
+        $this->call(QualifiersTableSeeder::class);
+        $this->call(QualifierAddressesTableSeeder::class);
+        $this->call(QualifierProfilesTableSeeder::class);
+        $this->call(QualifierDefermentsTableSeeder::class);
+        $this->call(QualifierNotavailsTableSeeder::class);
+        
     }
 }
